@@ -18,7 +18,7 @@ public class Vigenere {
                     int diff4 = diff + 97;
                     letter = (char) (diff4);
 
-            }
+        
                 else {
 
             }
