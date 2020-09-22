@@ -1,21 +1,33 @@
 import java.util.Scanner;
-
 public class Caesar {
     public static String encryptCaesar(String message) {
         int len = message.length();
-        String str2 = "";
+        String str2 = ""; 
         for (int i = 0; i < len; i++) {
             char ch = message.charAt(i);
-            if ( (97 <= ch) && (ch <= 122) ) {
-                int diff = (ch - 97)%26;
-                int diff2 = diff + 3;
+            if ( (65 <= ch) && (ch <= 90) ) {
+                int diff = ch - 62;
+                if ( (diff > 25) && (diff <= 28) ) {
+                    diff = diff % 26;
+                }
+                int diff2 = diff + 65;
                 ch = (char) (diff2);
                 str2 += ch;
             }
-            else if ( (122 < ch) || (ch < 97)) {
-                ch = (char) (ch);
+            else if ( ( 97 <= ch) && (ch <= 122) ) {
+                int diff = ch - 94;
+                if ( (diff > 25) && (diff <= 28) ) {
+                    diff = diff % 26;
+                }
+                int diff4 = diff + 97;
+                ch = (char) (diff4);
                 str2 += ch;
-            }
+
+        }
+            else {
+                str2 += ch;
+
+        }
 
         }
         return str2;
@@ -27,35 +39,96 @@ public class Caesar {
         for (int i = 0; i < len; i++) {
             char ch = message.charAt(i);
             if ( (97 <= ch) && (ch <= 122) ) {
-                int diff = ch - 3;
+                int diff = ch - 97;
+                if ( (diff > -1) && (diff < 3) ) {
+                    diff = diff + 26;
+            }
+                diff = diff + 94;
                 ch = (char) (diff);
                 str2 += ch;
-  
-            }
-             else if ( (120 <= ch) && (ch<= 122) ){
-                int diff = ch - 23;
+        }
+
+             else if ( (65 <= ch) && (ch <= 122) ) {
+                int diff = ch - 65;
+                if ( (diff > -1) && (diff < 3)) {
+                    diff = diff + 26;
+                }
+                diff = diff + 62;
                 ch = (char) (diff);
                 str2 += ch;
-
-             }
-
-            else if ( (122 < ch) || (ch < 97)){
-                ch = (char) (ch);
+            }
+            else {
                 str2 += ch;
             }
+
+        }
+       return str2;
+    }
+
+    public static String encryptCaesarKey(String message, int key) {
+       int len = message.length();
+        String str2 = ""; 
+        for (int i = 0; i < len; i++) {
+            char ch = message.charAt(i);
+            if ( (65 <= ch) && (ch <= 90) ) {
+                int diff = ch - (65 - key);
+                if ( (diff > 25) && (diff <= (25 + key)) ) {
+                    diff = diff % 26;
+                }
+                int diff2 = diff + 65;
+                ch = (char) (diff2);
+                str2 += ch;
+            }
+            else if ( ( 97 <= ch) && (ch <= 122) ) {
+                int diff = ch - (97 - key);
+                if ( (diff > 25) && (diff <= (25 + key)) ) {
+                    diff = diff % 26;
+                }
+                int diff4 = diff + 97;
+                ch = (char) (diff4);
+                str2 += ch;
+
+        }
+            else {
+                str2 += ch;
+
+        }
 
         }
         return str2;
     }
 
-    public static String encryptCaesarKey(String message, int key) {
-        return message;
-        // REPLACE THIS WITH YOUR CODE
-    }
-
     public static String decryptCaesarKey(String message, int key) {
-        return message;
-        // REPLACE THIS WITH YOUR CODE
+        int len = message.length();
+        String str2 = "";
+        int key2 = key % 26;
+        for (int i = 0; i < len; i++) {
+            char ch = message.charAt(i);
+            if ( (97 <= ch) && (ch <= 122) ) {
+                int diff = ch - 97;
+                if ( (diff > -1) && (diff < key2) ) {
+                    diff = diff + 26;
+            }
+                diff = diff + (97 - key2);
+                ch = (char) (diff);
+                str2 += ch;
+        }
+
+             else if ( (65 <= ch) && (ch <= 122) ) {
+                int diff = ch - 65;
+                if ( (diff > -1) && (diff < key2)) {
+                    diff = diff + 26;
+                }
+                diff = diff + (65 - key2);
+                ch = (char) (diff);
+                str2 += ch;
+            }
+            else {
+                str2 += ch;
+            }
+
+        }
+       return str2;
     }
 
 
