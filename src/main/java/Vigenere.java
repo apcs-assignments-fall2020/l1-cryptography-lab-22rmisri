@@ -1,3 +1,4 @@
+//Chloe Burrows and I worked together
 import java.util.Scanner;
 
 public class Vigenere {
