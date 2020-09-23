@@ -2,54 +2,62 @@ import java.util.Scanner;
 
 public class Vigenere {
     public static char encryptCaesarKey(char letter, char keyin) {
-                if ( (65 <= letter) && (letter <= 90) ) {
-                    int diff = letter - (65 - keyin);
-                    if ( (diff > 25) && (diff <= (25 + keyin)) ) {
-                        diff = diff % 26;
-                    }
-                    int diff2 = diff + 65;
-                    letter = (char) (diff2);
-                }
-                else if ( ( 97 <= letter) && (letter <= 122) ) {
-                    int diff = letter - (97 - keyin);
-                    if ( (diff > 25) && (diff <= (25 + keyin)) ) {
-                        diff = diff % 26;
-                    }
-                    int diff4 = diff + 97;
-                    letter = (char) (diff4);
-
-        
-                else {
-
+        if ( (65 <= letter) && (letter <= 90) ) {
+            int diff = letter - (65 - keyin);
+            if ( (diff > 25) && (diff <= (25 + keyin)) ) {
+                diff = diff % 26;
             }
-            return letter;
+            int diff2 = diff + 65;
+            letter = (char) (diff2);
+        }
+        else if ( ( 97 <= letter) && (letter <= 122) ) {
+            int diff = letter - (97 - keyin);
+            if ( (diff > 25) && (diff <= (25 + keyin)) ) {
+                diff = diff % 26;
+            }
+            int diff4 = diff + 97;
+            letter = (char) (diff4);
 
         }
+        return letter;
+
+    }
 
     public static String encryptVigenere(String message, String key) {
-        int len1 = key.length();
+        int len1 = message.length();
         String str = "";
-        for (int i = 0; i < len1; i++) {
+        int keyin2;
+        char keyin3 = ' ';
+        int n = 0;
+        for (int i = 0; i < len1; i++, n ++) {
             char ch = message.charAt(i);
-            char keyin = key.charAt(i);
+            char keyin = key.charAt(n);
             if ((keyin >= 97) && (keyin <= 122)) {
-                int keyin2 =  keyin - 97;
-                char keyin3 = (char) (keyin2);
+                keyin2 =  keyin - 97;
+                if (n >= key.length()) {
+                    n = 0;
+                }
+                keyin3 = (char) (keyin2); 
             }
             else if ( (keyin >= 65) && (keyin <= 90)){
-                int keyin2 = keyin - 65;
-                char keyin3 = (char) (keyin2);
+                keyin2 = keyin - 65;
+                if (n >= key.length()) {
+                    n = 0;
+                }
+                keyin3 = (char) (keyin2);
+            }
+            else {
+                if (n >= key.length()) {
+                    n = 0;
+                }
             }
             str += encryptCaesarKey(ch, keyin3);
             }
         return str;
         }
-
     public static String decryptVigenere(String message, String key) {
             return message;
     }
-
-
         public static void main(String[] args) {
             Scanner scan = new Scanner(System.in);
 
